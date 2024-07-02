@@ -74,16 +74,11 @@
                 <div class="p-2">
 
                 </div>
-                <select name="email" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
-                    <option value="Paramaribo Noord">Paramaribo Noord</option>
-                    <option value="Paramaribo Zuid">Paramaribo Zuid</option>
-                    <option value="Meerzorg">Meerzorg</option>
-                    <option value="Tamanredjo">Tamanredjo</option>
-                    <option value="Latour">Latour</option>
-                    <option value="Highway">Highway</option>
-                    <option value="Paranam">Paranam</option>
-                    <option value="Lelydorp">Zanderij</option>
-                    <option value="Saramacca">Coronie</option>
+                <select name="location" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
+                    @php($locations = \App\Models\Area::query()->get())
+                    @foreach($locations as $location)
+                        <option value="{{$location->name}}">{{$location->name}}</option>
+                    @endforeach
                 </select>
 
             </div>

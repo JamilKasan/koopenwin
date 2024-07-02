@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PromoEntryResource\Pages;
-use App\Filament\Resources\PromoEntryResource\RelationManagers;
-use App\Models\PromoEntry;
+use App\Filament\Resources\SmsMessageResource\Pages;
+use App\Filament\Resources\SmsMessageResource\RelationManagers;
+use App\Models\SmsMessage;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PromoEntryResource extends Resource
+class SmsMessageResource extends Resource
 {
-    protected static ?string $model = PromoEntry::class;
+    protected static ?string $model = SmsMessage::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -23,7 +23,7 @@ class PromoEntryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Textarea::make('text')
             ]);
     }
 
@@ -31,17 +31,13 @@ class PromoEntryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('code'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('firstname'),
-                Tables\Columns\TextColumn::make('contact'),
-                Tables\Columns\TextColumn::make('location'),
+
             ])
             ->filters([
                 //
             ])
             ->actions([
-//                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -58,9 +54,9 @@ class PromoEntryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPromoEntries::route('/'),
-            'create' => Pages\CreatePromoEntry::route('/create'),
-            'edit' => Pages\EditPromoEntry::route('/{record}/edit'),
+            'index' => Pages\ListSmsMessages::route('/'),
+            'create' => Pages\CreateSmsMessage::route('/create'),
+            'edit' => Pages\EditSmsMessage::route('/{record}/edit'),
         ];
     }
 }

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\CodeValidation;
+use App\Classes\Sms;
 use App\Mail\ThankYou;
+use App\Models\CodeRange;
 use App\Models\PromoCode;
 use App\Models\PromoEntry;
+use App\Models\SmsMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -12,27 +16,25 @@ class PromoEntryController extends Controller
 {
     public function store(Request $request)
     {
-        if (PromoCode::query()->where('code', $request->code)->exists())
+        $codeRange = CodeRange::query()->first();
+        $code = new CodeValidation();
+        $code->code = $request->code;
+        $code->start = $codeRange->start;
+        $code->end = $codeRange->end;
+        if ($code->validate())
         {
             $entry = new PromoEntry();
             $entry->code = $request->code;
             $entry->name = $request->name;
             $entry->firstname = $request->firstname;
             $entry->contact = $request->contact;
-            $entry->email = $request->email;
+            $entry->location = $request->location;
             $entry->save();
-
-            $code = PromoCode::query()->where('code', $request->code)->first();
-            if ($code->times_used == null)
-            {
-                $code->times_used = 1;
-
-            }
-            else{
-                $code->times_used++;
-            }
-            $code->save();
-            Mail::to($entry->email)->send(new ThankYou($entry->_id));
+            $text = SmsMessage::query()->first();
+            $sms = new Sms();
+            $sms->number = removeCountryCode($request->contact);
+            $sms->text = $text->text;
+            $sms->send();
             return redirect(route('thank-you'));
         }
         else
