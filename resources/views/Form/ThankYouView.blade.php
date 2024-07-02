@@ -1,4 +1,7 @@
 @include('app')
+<head>
+    <title>Mr TP Koop en Win</title>
+</head>
 <style>
     .checkmark {
         width: 80px;

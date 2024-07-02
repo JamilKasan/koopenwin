@@ -1,4 +1,7 @@
 @include('app')
+<head>
+    <title>Mr TP Koop en Win</title>
+</head>
 <body class="bg-gradient-to-b from-[#00b7f0] to-[#00205e] w-full">
 <div id="modal" class="z-10 bg-black/40 h-full w-full @if(!session()->has('promo_error')) hidden @endif fixed">
     <div class="justify-center flex">
