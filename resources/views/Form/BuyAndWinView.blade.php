@@ -2,6 +2,7 @@
 <head>
     <title>Mr TP Koop en Win</title>
 </head>
+
 <body class="bg-gradient-to-b from-[#00b7f0] to-[#00205e] w-full">
 <div id="modal" class="z-10 bg-black/40 h-full w-full @if(!session()->has('promo_error')) hidden @endif fixed">
     <div class="justify-center flex">
@@ -30,18 +31,21 @@
     <img class="w-full md:w-1/4" src="{{asset('TP_Koop_en_Win_KopText.png')}}" alt="">
 </div>
 <div class="w-full flex justify-center">
+{{--    {{ print_r($requestValue) }}--}}
     <div class="w-full px-4 pb-5  lg:w-1/2">
+        @php($arrayValue = session()->has('request_values') ? json_decode(session()->get('request_values'), true) : [])
         <form method="post" action="{{route('entry.store')}}">
             @csrf
             @method('post')
             <div class="pb-4 w-full">
+
                 <label class="text-white text-sm" for="">
                     Promo code
                 </label>
                 <div class="p-2">
 
                 </div>
-                <input name="code" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
+                <input value="{{ session()->has('request_values') ? $arrayValue['code'] : '' }}" name="code" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
             </div>
             <div class="pb-4">
                 <label class="text-white text-sm" for="">
@@ -50,7 +54,7 @@
                 <div class="p-2">
 
                 </div>
-                <input name="name" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
+                <input name="name" value="{{ session()->has('request_values') ? $arrayValue['name'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
             </div>
             <div class="pb-4">
                 <label class="text-white text-sm" for="">
@@ -59,7 +63,7 @@
                 <div class="p-2">
 
                 </div>
-                <input name="firstname" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
+                <input name="firstname" value="{{ session()->has('request_values') ? $arrayValue['firstname'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
             </div>
             <div class="pb-4">
                 <label class="text-white text-sm" for="">
@@ -68,7 +72,7 @@
                 <div class="p-2">
 
                 </div>
-                <input name="contact" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
+                <input name="contact" value="{{ session()->has('request_values') ? $arrayValue['contact'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
             </div>
             <div class="pb-4">
                 <label class="text-white text-sm" for="">
@@ -77,7 +81,7 @@
                 <div class="p-2">
 
                 </div>
-                <select name="location" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
+                <select name="location" value="{{ session()->has('request_values') ? $arrayValue['location'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
                     @php($locations = \App\Models\Area::query()->get())
                     @foreach($locations as $location)
                         <option value="{{$location->name}}">{{$location->name}}</option>

@@ -24,6 +24,10 @@ class PromoEntryController extends Controller
         $codeUpper = ensureLastLetterUppercase($request->code);
         if ($code->validate())
         {
+            if ( session()->has('request_values'))
+            {
+                session()->remove('request_values');
+            }
             if (!PromoEntry::query()->where('code', $codeUpper)->exists())
             {
                 $entry = new PromoEntry();
@@ -45,8 +49,15 @@ class PromoEntryController extends Controller
         }
         else
         {
+            $values = [];
+            $values['code'] = $request->code;
+            $values['name'] = $request->name;
+            $values['firstname'] = $request->firstname;
+            $values['contact'] = $request->contact;
+            $values['location'] = $request->location;
             session()->flash('promo_error', 'Your promo code is invalid');
-            return back();
+            session()->put('request_values', json_encode($values, true));
+            return redirect('/');
         }
 
     }

@@ -32,11 +32,39 @@ class test extends Command
      */
     public function handle()
     {
-        $text = SmsMessage::query()->first();
-        $sms = new Sms();
-        $sms->number = removeCountryCode('+5978744174');
-        $sms->text = $text->text;
-        $sms->send();
+        function isCodeInRange($code, $start, $end) {
+            if (!preg_match('/^\d{4}[A-Za-z]$/', $code) ||
+                !preg_match('/^\d{4}[A-Za-z]$/', $start) ||
+                !preg_match('/^\d{4}[A-Za-z]$/', $end)) {
+            }
+
+            $codeValue = convertToComparable($code);
+            $startValue = convertToComparable($start);
+            $endValue = convertToComparable($end);
+
+            return $codeValue >= $startValue && $codeValue <= $endValue;
+        }
+
+        function convertToComparable($code) {
+            $digits = substr($code, 0, 4);
+            $letter = strtoupper(substr($code, 4, 1));
+
+            return $digits . '_' . ord($letter);
+        }
+        $code = "0119O";
+        $start = "0001A";
+        $end = "0119P";
+
+        if (isCodeInRange($code, $start, $end)) {
+            echo "The code is within the range.";
+        } else {
+            echo "The code is not within the range.";
+        }
+//        $text = SmsMessage::query()->first();
+//        $sms = new Sms();
+//        $sms->number = removeCountryCode('+5978744174');
+//        $sms->text = $text->text;
+//        $sms->send();
 
 
 //        try {

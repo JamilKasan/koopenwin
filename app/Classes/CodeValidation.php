@@ -11,8 +11,9 @@ class CodeValidation
     public string $code;
 
     public function validate() {
-        // Check if the code matches the pattern: 4 digits followed by a letter
-        if (!preg_match('/^\d{4}[A-Za-z]$/', $this->code)) {
+        if (!preg_match('/^\d{4}[A-Za-z]$/', $this->code) ||
+            !preg_match('/^\d{4}[A-Za-z]$/', $this->start) ||
+            !preg_match('/^\d{4}[A-Za-z]$/', $this->end)) {
             return false;
         }
         $codeValue = $this->convert($this->code);
@@ -23,8 +24,7 @@ class CodeValidation
 
     private function convert($code) {
         $digits = substr($code, 0, 4);
-        $letter = substr($code, 4, 1);
-        $letter = strtoupper($letter);
+        $letter = strtoupper(substr($code, 4, 1));
         return $digits . '_' . ord($letter);
     }
 }
