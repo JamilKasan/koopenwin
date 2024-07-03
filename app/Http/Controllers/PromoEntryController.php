@@ -21,19 +21,25 @@ class PromoEntryController extends Controller
         $code->code = $request->code;
         $code->start = $codeRange->start;
         $code->end = $codeRange->end;
+        $codeUpper = ensureLastLetterUppercase($request->code);
         if ($code->validate())
         {
-            $entry = new PromoEntry();
-            $entry->code = $request->code;
-            $entry->name = $request->name;
-            $entry->firstname = $request->firstname;
-            $entry->contact = $request->contact;
-            $entry->location = $request->location;
-            $entry->save();
+            if (!PromoEntry::query()->where('code', $codeUpper)->exists())
+            {
+                $entry = new PromoEntry();
+                $entry->code = $codeUpper;
+                $entry->name = $request->name;
+                $entry->firstname = $request->firstname;
+                $entry->contact = $request->contact;
+                $entry->location = $request->location;
+                $entry->save();
+            }
             $text = SmsMessage::query()->first();
             $sms = new Sms();
             $sms->number = removeCountryCode($request->contact);
-            $sms->text = $text->text;
+            $text2 = str_replace('{name}', $request->firstname, $text->text);
+            $text2 = str_replace('{code}', $codeUpper, $text2);
+            $sms->text = $text2;
             $sms->send();
             return redirect(route('thank-you'));
         }
