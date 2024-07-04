@@ -49,15 +49,6 @@
             </div>
             <div class="pb-4">
                 <label class="text-white text-sm" for="">
-                    Naam
-                </label>
-                <div class="p-2">
-
-                </div>
-                <input name="name" value="{{ session()->has('request_values') ? $arrayValue['name'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
-            </div>
-            <div class="pb-4">
-                <label class="text-white text-sm" for="">
                     Voornaam
                 </label>
                 <div class="p-2">
@@ -67,7 +58,16 @@
             </div>
             <div class="pb-4">
                 <label class="text-white text-sm" for="">
-                    Contact nummer
+                    Naam
+                </label>
+                <div class="p-2">
+
+                </div>
+                <input name="name" value="{{ session()->has('request_values') ? $arrayValue['name'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
+            </div>
+            <div class="pb-4">
+                <label class="text-white text-sm" for="">
+                    Mobiel nummer
                 </label>
                 <div class="p-2">
 
@@ -76,7 +76,7 @@
             </div>
             <div class="pb-4">
                 <label class="text-white text-sm" for="">
-                    Woonwijk
+                    Woonplaats
                 </label>
                 <div class="p-2">
 
