@@ -57,9 +57,9 @@
         }
     }
 </style>
-<body class="bg-gradient-to-b from-[#00b7f0] to-[#00205e] w-full">
+<body class="bg-gradient-to-b from-[#043989] to-[#001a53] w-full">
 <div class="flex justify-center w-full">
-    <img class="w-full md:w-1/4" src="{{asset('TP_Koop_en_Win_KopText.png')}}" alt="">
+    <img class="w-full md:w-1/4" src="{{asset('Para_Springs_logo.png')}}" alt="">
 </div>
 <div class="w-full flex justify-center">
     <div class="text-xl text-white px-2">
