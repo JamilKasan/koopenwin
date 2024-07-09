@@ -1,6 +1,6 @@
 @include('app')
 <head>
-    <title>Mr TP Koop en Win</title>
+    <title>Win met Para Springs</title>
 </head>
 <style>
     .checkmark {

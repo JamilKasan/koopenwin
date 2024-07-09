@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
     nginx:
-        container_name: koopenwin_nginx
+        container_name: psw_promo_nginx
         image: nginx:latest
         ports:
             - "${APP_NGINX_PORT}:80"
@@ -12,42 +12,42 @@ services:
         depends_on:
             - php
         networks:
-            - koopenwin_network
+            - psw_promo_network
 
     php:
-        container_name: koopenwin_web
+        container_name: psw_promo_web
         build:
             context: .
             dockerfile: Dockerfile
-        image: koopenwin:latest
+        image: psw_promo:latest
         volumes:
             - ./:/var/www/html
         networks:
-            - koopenwin_network
+            - psw_promo_network
 
     scheduler:
-        container_name: koopenwin_scheduler
-        image: koopenwin:latest
+        container_name: psw_promo_scheduler
+        image: psw_promo:latest
         volumes:
             - ./:/var/www/html
         depends_on:
             - php
         networks:
-            - koopenwin_network
+            - psw_promo_network
         command: sh -c "while [ true ]; do php /var/www/html/artisan schedule:run --verbose --no-interaction & sleep 60; done"
 
 
     queue:
-        container_name: koopenwin_queue
-        image: koopenwin:latest
+        container_name: psw_promo_queue
+        image: psw_promo:latest
         volumes:
             - ./:/var/www/html
         depends_on:
             - php
         networks:
-            - koopenwin_network
+            - psw_promo_network
         command: php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90
 
 networks:
-    koopenwin_network:
+    psw_promo_network:
         driver: bridge

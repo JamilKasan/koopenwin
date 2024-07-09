@@ -16,6 +16,23 @@ class PromoEntryController extends Controller
 {
     public function store(Request $request)
     {
+        $codeUpper = ensureLastLetterUppercase($request->code);
+        $entry = new PromoEntry();
+        $entry->code = $codeUpper;
+        $entry->name = $request->name;
+        $entry->firstname = $request->firstname;
+        $entry->contact = $request->contact;
+        $entry->location = $request->location;
+        $entry->save();
+        $text = SmsMessage::query()->first();
+        $sms = new Sms();
+        $sms->number = removeCountryCode($request->contact);
+        $text2 = str_replace('{name}', $request->firstname, $text->text);
+        $text2 = str_replace('{code}', $codeUpper, $text2);
+        $sms->text = $text2;
+        $sms->send();
+        return redirect(route('thank-you'));
+
         $codeRange = CodeRange::query()->first();
         $code = new CodeValidation();
         $code->code = $request->code;

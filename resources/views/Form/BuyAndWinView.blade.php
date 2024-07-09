@@ -1,9 +1,9 @@
 @include('app')
 <head>
-    <title>Mr TP Koop en Win</title>
+    <title>Win met Para Springs</title>
 </head>
 
-<body class="bg-gradient-to-b from-[#00b7f0] to-[#00205e] w-full">
+<body class="bg-gradient-to-b from-[#043989] to-[#001a53] w-full">
 <div id="modal" class="z-10 bg-black/40 h-full w-full @if(!session()->has('promo_error')) hidden @endif fixed">
     <div class="justify-center flex">
         <div class="fixed backdrop-blur-sm bottom-1/2 rounded-lg p-10 bg-white/10 shadow-2xl">
@@ -28,7 +28,7 @@
 ];
 @endphp
 <div class="flex justify-center w-full">
-    <img class="w-full md:w-1/4" src="{{asset('TP_Koop_en_Win_KopText.png')}}" alt="">
+    <img class="w-full md:w-1/4" src="{{asset('Para_Springs_logo.png')}}" alt="">
 </div>
 <div class="w-full flex justify-center">
 {{--    {{ print_r($requestValue) }}--}}
@@ -74,21 +74,21 @@
                 </div>
                 <input name="contact" value="{{ session()->has('request_values') ? $arrayValue['contact'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
             </div>
-            <div class="pb-4">
-                <label class="text-white text-sm" for="">
-                    Woonplaats
-                </label>
-                <div class="p-2">
+{{--            <div class="pb-4">--}}
+{{--                <label class="text-white text-sm" for="">--}}
+{{--                    Woonplaats--}}
+{{--                </label>--}}
+{{--                <div class="p-2">--}}
 
-                </div>
-                <select name="location" value="{{ session()->has('request_values') ? $arrayValue['location'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
-                    @php($locations = \App\Models\Area::query()->get())
-                    @foreach($locations as $location)
-                        <option value="{{$location->name}}">{{$location->name}}</option>
-                    @endforeach
-                </select>
+{{--                </div>--}}
+{{--                <select name="location" value="{{ session()->has('request_values') ? $arrayValue['location'] : '' }}" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">--}}
+{{--                    @php($locations = \App\Models\Area::query()->get())--}}
+{{--                    @foreach($locations as $location)--}}
+{{--                        <option value="{{$location->name}}">{{$location->name}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
 
-            </div>
+{{--            </div>--}}
 
             <br>
             <div class="pb-4">

@@ -96,7 +96,7 @@ return [
             'driver' => 'mongodb',
 //            'dsn' => env('MONGO_URL','mongodb://localhost'),
             'dsn' => env('MONGO_URL', 'mongodb://192.168.2.160'),
-            'database' => env('MONGO_DB', 'koopenwin'),
+            'database' => env('MONGO_DB', 'psw_promo'),
         ],
 
     ],
