@@ -52,7 +52,8 @@
     }
 
     @keyframes fill {
-        100% {
+        100%
+        {
             box-shadow: inset 0px 0px 0px 30px #4CAF50;
         }
     }
@@ -68,8 +69,6 @@
             <circle class="checkmark__circle" cx="26" cy="26" r="25"></circle>
             <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
         </svg>
-
-
     </div>
 </div>
 </body>
