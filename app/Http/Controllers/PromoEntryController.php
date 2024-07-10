@@ -16,39 +16,21 @@ class PromoEntryController extends Controller
 {
     public function store(Request $request)
     {
-        $codeUpper = ensureLastLetterUppercase($request->code);
-        $entry = new PromoEntry();
-        $entry->code = $codeUpper;
-        $entry->name = $request->name;
-        $entry->firstname = $request->firstname;
-        $entry->contact = $request->contact;
-        $entry->location = $request->location;
-        $entry->save();
-        $text = SmsMessage::query()->first();
-        $sms = new Sms();
-        $sms->number = removeCountryCode($request->contact);
-        $text2 = str_replace('{name}', $request->firstname, $text->text);
-        $text2 = str_replace('{code}', $codeUpper, $text2);
-        $sms->text = $text2;
-        $sms->send();
-        return redirect(route('thank-you'));
-
         $codeRange = CodeRange::query()->first();
         $code = new CodeValidation();
         $code->code = $request->code;
         $code->start = $codeRange->start;
         $code->end = $codeRange->end;
-        $codeUpper = ensureLastLetterUppercase($request->code);
         if ($code->validate())
         {
             if ( session()->has('request_values'))
             {
                 session()->remove('request_values');
             }
-            if (!PromoEntry::query()->where('code', $codeUpper)->exists())
+            if (!PromoEntry::query()->where('code', $request->code)->exists())
             {
                 $entry = new PromoEntry();
-                $entry->code = $codeUpper;
+                $entry->code = $request->code;
                 $entry->name = $request->name;
                 $entry->firstname = $request->firstname;
                 $entry->contact = $request->contact;
@@ -59,7 +41,7 @@ class PromoEntryController extends Controller
             $sms = new Sms();
             $sms->number = removeCountryCode($request->contact);
             $text2 = str_replace('{name}', $request->firstname, $text->text);
-            $text2 = str_replace('{code}', $codeUpper, $text2);
+            $text2 = str_replace('{code}', $request->code, $text2);
             $sms->text = $text2;
             $sms->send();
             return redirect(route('thank-you'));
