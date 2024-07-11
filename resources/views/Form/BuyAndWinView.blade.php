@@ -39,12 +39,10 @@
             @method('post')
             <div class="pb-4 pt-4 w-full text-red-400">
                 <p>
-                    *Bewaar de fles met uw nummer, want alleen met deze fles kun je een prijs in ontvangst nemen.
+                    *Bewaar de fles met uw PN, want alleen met deze fles kun je een prijs in ontvangst nemen.
                 </p>
             </div>
-
             <div class="pb-4 w-full">
-
                 <label class="text-white text-sm" for="">
                     PN
                 </label>
