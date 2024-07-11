@@ -34,8 +34,7 @@ class PromoEntryResource extends Resource
                 Tables\Columns\TextColumn::make('code'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('firstname'),
-                Tables\Columns\TextColumn::make('contact'),
-                Tables\Columns\TextColumn::make('location'),
+                Tables\Columns\TextColumn::make('contact')->searchable(['code', 'name', 'firstname', 'contact']),
             ])
             ->filters([
                 //
@@ -44,7 +43,6 @@ class PromoEntryResource extends Resource
 //                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
