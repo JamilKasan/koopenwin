@@ -21,6 +21,10 @@ Route::get('/test', function () {
     return view('Mail.ThankYouView');
 });
 
+Route::get('/test23', function () {
+    return view('test');
+});
+
 
 
 Route::get('/thank-you', function () {
