@@ -22,7 +22,8 @@
     @foreach($entries as $entry)
         <tr>
             <td>
-                {{$entry->created_at}}
+                @php($dateTime = new DateTime($entry->created_at))
+                {{$dateTime->format('d-m-Y')}}
             </td>
             <td>
                 {{$entry->code}}
