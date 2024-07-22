@@ -2,6 +2,9 @@
     <thead>
     <tr>
         <th>
+            Date
+        </th>
+        <th>
             Code
         </th>
         <th>
@@ -18,6 +21,9 @@
     <tbody>
     @foreach($entries as $entry)
         <tr>
+            <td>
+                {{$entry->created_at}}
+            </td>
             <td>
                 {{$entry->code}}
             </td>
