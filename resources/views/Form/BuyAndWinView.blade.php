@@ -37,6 +37,7 @@
         <form method="post" action="{{route('entry.store')}}">
             @csrf
             @method('post')
+            <input type="text" class="hidden" name="full_name">
             <div class="pb-4 w-full">
 
                 <label class="text-white text-sm" for="">
@@ -45,7 +46,7 @@
                 <div class="p-2">
 
                 </div>
-                <input value="{{ session()->has('request_values') ? $arrayValue['code'] : '' }}" name="code" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
+                <input maxlength="5" value="{{ session()->has('request_values') ? $arrayValue['code'] : '' }}" name="code" type="text" class="py-2 px-3 bg-black/10 focus:bg-gradient-to-r focus:from-transparent focus:to-white/5   w-full outline-none rounded text-gray-100 transition ease-in-out delay-100 shadow-inner">
             </div>
             <div class="pb-4">
                 <label class="text-white text-sm" for="">

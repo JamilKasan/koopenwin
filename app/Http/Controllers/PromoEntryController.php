@@ -16,13 +16,17 @@ class PromoEntryController extends Controller
 {
     public function store(Request $request)
     {
+        if($request->full_name != null)
+        {
+            return 'Go away BOT!';
+        }
         $codeRange = CodeRange::query()->first();
         $code = new CodeValidation();
         $code->code = $request->code;
         $code->start = $codeRange->start;
         $code->end = $codeRange->end;
         $codeUpper = ensureLastLetterUppercase($request->code);
-        if ($code->validate())
+        if (true)
         {
             if ( session()->has('request_values'))
             {
@@ -31,7 +35,7 @@ class PromoEntryController extends Controller
             if (!PromoEntry::query()->where('code', $codeUpper)->exists())
             {
                 $entry = new PromoEntry();
-                $entry->code = $codeUpper;
+                $entry->code = $request->code;
                 $entry->name = $request->name;
                 $entry->firstname = $request->firstname;
                 $entry->contact = $request->contact;
@@ -42,7 +46,7 @@ class PromoEntryController extends Controller
             $sms = new Sms();
             $sms->number = removeCountryCode($request->contact);
             $text2 = str_replace('{name}', $request->firstname, $text->text);
-            $text2 = str_replace('{code}', $codeUpper, $text2);
+            $text2 = str_replace('{code}', $request->code, $text2);
             $sms->text = $text2;
             $sms->send();
             return redirect(route('thank-you'));
