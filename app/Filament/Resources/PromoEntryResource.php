@@ -31,14 +31,16 @@ class PromoEntryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('code'),
+                Tables\Columns\TextColumn::make('code')->searchable(['code', 'name', 'firstname']),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('firstname'),
                 Tables\Columns\TextColumn::make('contact'),
                 Tables\Columns\TextColumn::make('location'),
+                Tables\Columns\ToggleColumn::make('valid'),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('valid')
+                    ->query(fn (Builder $query): Builder => $query->where('valid', true))
             ])
             ->actions([
 //                Tables\Actions\EditAction::make(),

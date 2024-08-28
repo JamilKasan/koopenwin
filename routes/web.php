@@ -41,3 +41,9 @@ Route::resources(
 
     ]
 );
+
+Route::get('trekking',
+function ()
+{
+    return view('Trekking');
+});
